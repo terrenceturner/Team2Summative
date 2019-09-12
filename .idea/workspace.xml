@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8e1ec61-0322-4cf0-a93c-96f04fe97643" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/rental-store-group/src/main/java/com/company/rentalstoregroup/service/ServiceLayer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rental-store-group/src/main/java/com/company/rentalstoregroup/viewmodel/InvoiceViewModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rental-store-group/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/rental-store-group/.gitignore" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/rental-store-group/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -204,7 +201,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="727" y="5" width="1196" height="1012" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.42513368" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
