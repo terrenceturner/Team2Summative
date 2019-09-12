@@ -1,5 +1,6 @@
 package com.company.rentalstoregroup.dao;
 import com.company.rentalstoregroup.dto.Invoice;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -11,7 +12,7 @@ import java.util.List;
 @Repository
 public class InvoiceDaoJdbcTemplateImpl implements InvoiceDao {
     //Prepared Statements
-    private static final String INSERT_INVOICE_SQL = "INSERT INTO invoice (customer_id, order_date, pickup_date, return_date, late_fee values (?, ?, ?, ?, ?)";
+    private static final String INSERT_INVOICE_SQL = "INSERT INTO invoice (customer_id, order_date, pickup_date, return_date, late_fee) VALUE (?, ?, ?, ?, ?)";
     private static final String SELECT_INVOICE_SQL = "SELECT * FROM invoice WHERE invoice_id =  ?";
     private static final String SELECT_ALL_INVOICES_SQL = "SELECT * FROM invoice";
     private static final String UPDATE_INVOICE_SQL = "UPDATE invoice SET customer_id = ?, order_date = ?, pickup_date = ?, return_date = ?, late_fee = ? WHERE invoice_id = ?";
@@ -21,6 +22,12 @@ public class InvoiceDaoJdbcTemplateImpl implements InvoiceDao {
 
     //Method Implementation
     private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public InvoiceDaoJdbcTemplateImpl (JdbcTemplate jdbcTemplate){
+
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     @Transactional
@@ -44,7 +51,6 @@ public class InvoiceDaoJdbcTemplateImpl implements InvoiceDao {
 
     @Override
     public List<Invoice> getAllInvoices() {
-
         return jdbcTemplate.query(SELECT_ALL_INVOICES_SQL, this::mapRowToInvoice);
     }
 
