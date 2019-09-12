@@ -1,6 +1,8 @@
 package com.company.rentalstoregroup.dao;
 
 import com.company.rentalstoregroup.dto.Customer;
+import com.company.rentalstoregroup.dto.Invoice;
+import com.company.rentalstoregroup.dto.Invoice_Item;
 import com.company.rentalstoregroup.dto.Item;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,15 +36,32 @@ public class ItemDaoTest {
     public void setUp() throws Exception {
 
         // Clean up the test db
-        List<Item> itemList = itemDao.getAllItems();
+        List<Customer> customerList = customerDao.findAllCustomer();
+        for (Customer customer : customerList){
+            customerDao.deleteCustomer(customer.getCustomerId());
+        }
 
+        List<Item> itemList = itemDao.getAllItems();
         for (Item item : itemList) {
             itemDao.deleteItem(item.getItem_id());
         }
+
+        List<Invoice> invoiceList = invoiceDao.getAllInvoices();
+        for (Invoice invoice :invoiceList) {
+            invoiceDao.deleteInvoice(invoice.getInvoice_id());
+        }
+
+
+        List<Invoice_Item> invoice_itemList = invoice_itemDao.getAllInvoice_Item();
+        for (Invoice_Item invoice_item : invoice_itemList){
+            invoice_itemDao.deleteInvoice_Item(invoice_item.getInvoice_item_id());
+        }
+
+
     }
 
     @Test
-    public void getAddDeleteItem() {
+    public void getAddItem() {
 
         Item item = new Item();
         item.setItem_id(111);
@@ -55,11 +74,25 @@ public class ItemDaoTest {
 
         assertEquals(item, item1);
 
+
+    }
+
+    @Test
+    public void deleteItem(){
+        Item item = new Item();
+        item.setItem_id(111);
+        item.setName("Item");
+        item.setDescription("Awesome Item");
+        item.setDaily_rate(new BigDecimal("10.99"));
+        itemDao.addItem(item);
+
         itemDao.deleteItem(item.getItem_id());
 
-        item1 = itemDao.getItem(item.getItem_id());
+        Item item1 = itemDao.getItem(item.getItem_id());
 
         assertNull(item1);
+
+
     }
 
     @Test
