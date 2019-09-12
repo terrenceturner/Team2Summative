@@ -84,12 +84,12 @@ public class Customer {
     //constructor (optional, recommended)
 
 
-    public Customer(Integer customerId, String firstName, String lastName, String email, String company, String phone) {
-        this.customerId = customerId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.company = company;
-        this.phone = phone;
-    }
+//    public Customer(Integer customerId, String firstName, String lastName, String email, String company, String phone) {
+//        this.customerId = customerId;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.email = email;
+//        this.company = company;
+//        this.phone = phone;
+//    }
 }
