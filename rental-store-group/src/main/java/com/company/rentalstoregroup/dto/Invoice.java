@@ -2,6 +2,7 @@ package com.company.rentalstoregroup.dto;
 
 import javax.swing.text.DateFormatter;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -9,9 +10,9 @@ public class Invoice {
     //properties (columns)
     private int invoice_id;
     private int customer_id;
-    private Date order_date;
-    private Date pickup_date;
-    private Date return_date;
+    private LocalDate order_date;
+    private LocalDate pickup_date;
+    private LocalDate return_date;
     private BigDecimal late_fee;
 
     //getters and setters
@@ -32,27 +33,27 @@ public class Invoice {
         this.customer_id = customer_id;
     }
 
-    public Date getOrder_date() {
+    public LocalDate getOrder_date() {
         return order_date;
     }
 
-    public void setOrder_date(Date order_date) {
+    public void setOrder_date(LocalDate order_date) {
         this.order_date = order_date;
     }
 
-    public Date getPickup_date() {
+    public LocalDate getPickup_date() {
         return pickup_date;
     }
 
-    public void setPickup_date(Date pickup_date) {
+    public void setPickup_date(LocalDate pickup_date) {
         this.pickup_date = pickup_date;
     }
 
-    public Date getReturn_date() {
+    public LocalDate getReturn_date() {
         return return_date;
     }
 
-    public void setReturn_date(Date return_date) {
+    public void setReturn_date(LocalDate return_date) {
         this.return_date = return_date;
     }
 
@@ -87,8 +88,7 @@ public class Invoice {
 
     //constructor (optional, recommended)
 
-    public Invoice(int invoice_id, int customer_id, Date order_date, Date pickup_date, Date return_date, BigDecimal late_fee) {
-        this.invoice_id = invoice_id;
+    public Invoice(int customer_id, LocalDate order_date, LocalDate pickup_date, LocalDate return_date, BigDecimal late_fee) {
         this.customer_id = customer_id;
         this.order_date = order_date;
         this.pickup_date = pickup_date;
