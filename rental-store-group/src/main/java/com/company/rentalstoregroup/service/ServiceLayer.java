@@ -1,5 +1,4 @@
 package com.company.rentalstoregroup.service;
-
 import com.company.rentalstoregroup.dao.CustomerDao;
 import com.company.rentalstoregroup.dao.InvoiceDao;
 import com.company.rentalstoregroup.dao.Invoice_ItemDao;
@@ -11,7 +10,6 @@ import com.company.rentalstoregroup.dto.Item;
 import com.company.rentalstoregroup.viewmodel.InvoiceViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -122,7 +120,7 @@ public class ServiceLayer {
         customerDao.updateCustomer(customer);
     }
 
-    public void removeCusomter(int id) {
+    public void removeCustomer(int id) {
         customerDao.deleteCustomer(id);
     }
 
