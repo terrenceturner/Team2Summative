@@ -39,7 +39,7 @@ public class CustomerDaoJdbcTemplateImpl implements CustomerDao {
         jdbcTemplate.update(INSERT_CUSTOMER_SQL,customer.getFirstName(),customer.getLastName(),customer.getEmail(),customer.getCompany(),
                 customer.getPhone());
         int id = jdbcTemplate.queryForObject("select LAST_INSERT_ID()",Integer.class);
-        customer.setCustomerId(customer.getCustomerId());
+        customer.setCustomerId(id);
         return customer;
     }
 
