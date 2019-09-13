@@ -9,4 +9,5 @@ public class itemController {
     //@RequestMapping(value = "/", method = RequestMethod.*)
     //@ResponseStatus(value = HttpStatus.*)
     //public void methodName(Class class){}
+    //will call to service layer
 }
