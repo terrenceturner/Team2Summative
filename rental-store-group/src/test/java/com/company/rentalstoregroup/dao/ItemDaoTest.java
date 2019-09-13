@@ -19,45 +19,34 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class ItemDaoTest {
-
+    // Properties
     @Autowired
-    CustomerDao customerDao;
-
+    protected CustomerDaoJdbcTemplateImpl customerDao;
     @Autowired
-    ItemDao itemDao;
-
+    protected Invoice_ItemDaoJdbcTemplateImpl invoice_itemDao;
     @Autowired
-    InvoiceDao invoiceDao;
-
+    protected InvoiceDaoJdbcTemplateImpl invoiceDao;
     @Autowired
-    Invoice_ItemDao invoice_itemDao;
+    protected ItemDaoJdbcTemplateImpl itemDao;
 
+    // setUp()
     @Before
     public void setUp() throws Exception {
-
-        // Clean up the test db
-        List<Customer> customerList = customerDao.findAllCustomer();
-        for (Customer customer : customerList){
-            customerDao.deleteCustomer(customer.getCustomerId());
-        }
-
-        List<Item> itemList = itemDao.getAllItems();
-        for (Item item : itemList) {
-            itemDao.deleteItem(item.getItem_id());
-        }
-
-        List<Invoice> invoiceList = invoiceDao.getAllInvoices();
-        for (Invoice invoice :invoiceList) {
-            invoiceDao.deleteInvoice(invoice.getInvoice_id());
-        }
-
-
+        // Clean the Invoice_Item database
         List<Invoice_Item> invoice_itemList = invoice_itemDao.getAllInvoice_Item();
-        for (Invoice_Item invoice_item : invoice_itemList){
-            invoice_itemDao.deleteInvoice_Item(invoice_item.getInvoice_item_id());
-        }
+        invoice_itemList.forEach(invoice_item -> invoice_itemDao.deleteInvoice_Item(invoice_item.getInvoice_item_id()));
 
+        // Clean the Invoice database
+        List<Invoice> invoiceList = invoiceDao.getAllInvoices();
+        invoiceList.forEach(invoice -> invoiceDao.deleteInvoice(invoice.getInvoice_id()));
 
+        // Clean the Item database
+        List<Item> itemList = itemDao.getAllItems();
+        itemList.forEach(item -> itemDao.deleteItem(item.getItem_id()));
+
+        // Clean the Customer database
+        List<Customer> customerList = customerDao.findAllCustomer();
+        customerList.forEach(customer -> customerDao.deleteCustomer(customer.getCustomerId()));
     }
 
     @Test
