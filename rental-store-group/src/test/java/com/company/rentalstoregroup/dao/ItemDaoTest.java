@@ -53,11 +53,10 @@ public class ItemDaoTest {
     public void getAddItem() {
 
         Item item = new Item();
-        item.setItem_id(111);
         item.setName("Item");
         item.setDescription("Awesome Item");
         item.setDaily_rate(new BigDecimal("10.99"));
-        itemDao.addItem(item);
+        item = itemDao.addItem(item);
 
         Item item1 = itemDao.getItem(item.getItem_id());
 
@@ -69,11 +68,10 @@ public class ItemDaoTest {
     @Test
     public void deleteItem(){
         Item item = new Item();
-        item.setItem_id(111);
         item.setName("Item");
         item.setDescription("Awesome Item");
         item.setDaily_rate(new BigDecimal("10.99"));
-        itemDao.addItem(item);
+        item = itemDao.addItem(item);
 
         itemDao.deleteItem(item.getItem_id());
 
@@ -88,11 +86,10 @@ public class ItemDaoTest {
     public void updateItem(){
 
         Item item = new Item();
-        item.setItem_id(111);
         item.setName("Item");
         item.setDescription("Awesome Item");
         item.setDaily_rate(new BigDecimal("10.99"));
-        itemDao.addItem(item);
+        item = itemDao.addItem(item);
 
         item.setDescription("Nice Item");
         item.setDaily_rate(new BigDecimal("11.99"));
@@ -110,18 +107,16 @@ public class ItemDaoTest {
     public void getAllItems(){
 
         Item item = new Item();
-        item.setItem_id(111);
         item.setName("Item");
         item.setDescription("Awesome Item");
         item.setDaily_rate(new BigDecimal("10.99"));
-        itemDao.addItem(item);
+        item = itemDao.addItem(item);
 
         item = new Item();
-        item.setItem_id(222);
         item.setName("Other Item");
         item.setDescription("Nice Item");
         item.setDaily_rate(new BigDecimal("11.99"));
-        itemDao.addItem(item);
+        item = itemDao.addItem(item);
 
         List<Item> itemList = itemDao.getAllItems();
 
