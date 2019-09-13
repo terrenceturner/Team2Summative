@@ -58,4 +58,7 @@ public class ServiceLayer {
         itemDao.deleteItem(id);
     }
 
+    //Customer API
+
+
 }
