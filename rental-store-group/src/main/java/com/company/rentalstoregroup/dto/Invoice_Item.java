@@ -6,6 +6,7 @@ public class Invoice_Item {
     // Properties
     private int invoice_item_id;
     private int invoice_id;
+    private int item_id;
     private int quantity;
     private BigDecimal unit_rate;
     private BigDecimal discount;
@@ -23,7 +24,12 @@ public class Invoice_Item {
     public void setInvoice_id(int invoice_idIn) {
         this.invoice_id = invoice_idIn;
     }
-
+    public int getItem_id() {
+        return this.item_id;
+    }
+    public void setItem_id(int item_idIn) {
+        this.item_id = item_idIn;
+    }
     public int getQuantity() {
         return this.quantity;
     }
@@ -51,12 +57,13 @@ public class Invoice_Item {
         Invoice_Item that = (Invoice_Item) o;
         return invoice_item_id == that.invoice_item_id &&
                 invoice_id == that.invoice_id &&
+                item_id == that.item_id &&
                 quantity == that.quantity &&
                 unit_rate.equals(that.unit_rate) &&
                 discount.equals(that.discount);
     }
     @Override
     public int hashCode() {
-        return Objects.hash(invoice_item_id, invoice_id, quantity, unit_rate, discount);
+        return Objects.hash(invoice_item_id, invoice_id, item_id, quantity, unit_rate, discount);
     }
 }
