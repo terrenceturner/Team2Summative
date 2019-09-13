@@ -32,10 +32,6 @@ public class Invoice_ItemDaoTest {
     // setUp()
     @Before
     public void setUp() throws Exception {
-        // Clean the Customer database
-        List<Customer> customerList = customerDao.findAllCustomer();
-        customerList.forEach(customer -> customerDao.deleteCustomer(customer.getCustomerId()));
-
         // Clean the Invoice_Item database
         List<Invoice_Item> invoice_itemList = invoice_itemDao.getAllInvoice_Item();
         invoice_itemList.forEach(invoice_item -> invoice_itemDao.deleteInvoice_Item(invoice_item.getInvoice_item_id()));
@@ -47,6 +43,10 @@ public class Invoice_ItemDaoTest {
         // Clean the Item database
         List<Item> itemList = itemDao.getAllItems();
         itemList.forEach(item -> itemDao.deleteItem(item.getItem_id()));
+
+        // Clean the Customer database
+        List<Customer> customerList = customerDao.findAllCustomer();
+        customerList.forEach(customer -> customerDao.deleteCustomer(customer.getCustomerId()));
     }
 
     // Method Tests
@@ -80,6 +80,7 @@ public class Invoice_ItemDaoTest {
         // Create and add a new Invoice_Item to the database
         Invoice_Item invoice_item = new Invoice_Item();
         invoice_item.setInvoice_id(invoice.getInvoice_id());
+        invoice_item.setItem_id(item.getItem_id());
         invoice_item.setQuantity(2);
         invoice_item.setUnit_rate(new BigDecimal("1.99"));
         invoice_item.setDiscount(new BigDecimal("9.99"));
@@ -129,6 +130,7 @@ public class Invoice_ItemDaoTest {
         // Create and add a new Invoice_Item to the database (invoice_item1)
         Invoice_Item invoice_item1 = new Invoice_Item();
         invoice_item1.setInvoice_id(invoice.getInvoice_id());
+        invoice_item1.setItem_id(item.getItem_id());
         invoice_item1.setQuantity(2);
         invoice_item1.setUnit_rate(new BigDecimal("1.99"));
         invoice_item1.setDiscount(new BigDecimal("9.99"));
@@ -137,6 +139,7 @@ public class Invoice_ItemDaoTest {
         // Create and add a second Invoice_Item to the database (invoice_item2)
         Invoice_Item invoice_item2 = new Invoice_Item();
         invoice_item2.setInvoice_id(invoice.getInvoice_id());
+        invoice_item2.setItem_id(item.getItem_id());
         invoice_item2.setQuantity(3);
         invoice_item2.setUnit_rate(new BigDecimal("2.99"));
         invoice_item2.setDiscount(new BigDecimal("0.99"));
@@ -179,6 +182,7 @@ public class Invoice_ItemDaoTest {
         // Create and add a new Invoice_Item to the database
         Invoice_Item invoice_item = new Invoice_Item();
         invoice_item.setInvoice_id(invoice.getInvoice_id());
+        invoice_item.setItem_id(item.getItem_id());
         invoice_item.setQuantity(2);
         invoice_item.setUnit_rate(new BigDecimal("1.99"));
         invoice_item.setDiscount(new BigDecimal("9.99"));
@@ -227,6 +231,7 @@ public class Invoice_ItemDaoTest {
         // Create and add a new Invoice_Item to the database
         Invoice_Item invoice_item = new Invoice_Item();
         invoice_item.setInvoice_id(invoice.getInvoice_id());
+        invoice_item.setItem_id(item.getItem_id());
         invoice_item.setQuantity(2);
         invoice_item.setUnit_rate(new BigDecimal("1.99"));
         invoice_item.setDiscount(new BigDecimal("9.99"));

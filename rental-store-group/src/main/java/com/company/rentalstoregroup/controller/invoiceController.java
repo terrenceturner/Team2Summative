@@ -16,9 +16,9 @@ public class invoiceController {
     //will call to service layer
 
     //create
-    @RequestMapping(value = "/", method = RequestMethod.PUT)
-    @ResponseStatus(value = HttpStatus.CREATED)
-    public void methodName(Class class){}
+//    @RequestMapping(value = "/", method = RequestMethod.PUT)
+//    @ResponseStatus(value = HttpStatus.CREATED)
+//    public void methodName(Class class){}
 
 
     //delete
