@@ -44,7 +44,7 @@ public class InvoiceDaoJdbcTemplateImplTest {
         customer = customerDao.addCustomer(customer);
 
         Invoice invoice = new Invoice(
-                customer.getCustomerId();
+                customer.getCustomerId(),
                 LocalDate.of(2000,01,01),
                 LocalDate.of(2000,01,01),
                 LocalDate.of(2000,01,01),
