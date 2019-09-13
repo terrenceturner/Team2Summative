@@ -22,19 +22,32 @@ public class ItemDaoTest {
 
 
     @Autowired
-    ItemDao itemDao;
+    protected CustomerDaoJdbcTemplateImpl customerDao;
+    @Autowired
+    protected Invoice_ItemDaoJdbcTemplateImpl invoice_itemDao;
+    @Autowired
+    protected InvoiceDaoJdbcTemplateImpl invoiceDao;
+    @Autowired
+    protected ItemDaoJdbcTemplateImpl itemDao;
 
-
+    // setUp()
     @Before
     public void setUp() throws Exception {
+        // Clean the Invoice_Item database
+        List<Invoice_Item> invoice_itemList = invoice_itemDao.getAllInvoice_Item();
+        invoice_itemList.forEach(invoice_item -> invoice_itemDao.deleteInvoice_Item(invoice_item.getInvoice_item_id()));
 
-        // Clean up the test db
+        // Clean the Invoice database
+        List<Invoice> invoiceList = invoiceDao.getAllInvoices();
+        invoiceList.forEach(invoice -> invoiceDao.deleteInvoice(invoice.getInvoice_id()));
+
+        // Clean the Item database
         List<Item> itemList = itemDao.getAllItems();
-        for (Item item : itemList) {
-            itemDao.deleteItem(item.getItem_id());
-        }
+        itemList.forEach(item -> itemDao.deleteItem(item.getItem_id()));
 
-
+        // Clean the Customer database
+        List<Customer> customerList = customerDao.findAllCustomer();
+        customerList.forEach(customer -> customerDao.deleteCustomer(customer.getCustomerId()));
     }
 
     @Test

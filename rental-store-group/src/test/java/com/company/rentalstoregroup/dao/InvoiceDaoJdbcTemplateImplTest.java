@@ -2,6 +2,8 @@ package com.company.rentalstoregroup.dao;
 
 import com.company.rentalstoregroup.dto.Customer;
 import com.company.rentalstoregroup.dto.Invoice;
+import com.company.rentalstoregroup.dto.Invoice_Item;
+import com.company.rentalstoregroup.dto.Item;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,16 +23,32 @@ import static org.junit.Assert.*;
 public class InvoiceDaoJdbcTemplateImplTest {
 
     @Autowired
-    InvoiceDao invoiceDao;
+    protected CustomerDaoJdbcTemplateImpl customerDao;
     @Autowired
-    CustomerDao customerDao;
+    protected Invoice_ItemDaoJdbcTemplateImpl invoice_itemDao;
+    @Autowired
+    protected InvoiceDaoJdbcTemplateImpl invoiceDao;
+    @Autowired
+    protected ItemDaoJdbcTemplateImpl itemDao;
 
+    // setUp()
     @Before
     public void setUp() throws Exception {
-        List<Invoice> invoices = invoiceDao.getAllInvoices();
-        for (Invoice i : invoices){
-            invoiceDao.deleteInvoice(i.getInvoice_id());
-        }
+        // Clean the Invoice_Item database
+        List<Invoice_Item> invoice_itemList = invoice_itemDao.getAllInvoice_Item();
+        invoice_itemList.forEach(invoice_item -> invoice_itemDao.deleteInvoice_Item(invoice_item.getInvoice_item_id()));
+
+        // Clean the Invoice database
+        List<Invoice> invoiceList = invoiceDao.getAllInvoices();
+        invoiceList.forEach(invoice -> invoiceDao.deleteInvoice(invoice.getInvoice_id()));
+
+        // Clean the Item database
+        List<Item> itemList = itemDao.getAllItems();
+        itemList.forEach(item -> itemDao.deleteItem(item.getItem_id()));
+
+        // Clean the Customer database
+        List<Customer> customerList = customerDao.findAllCustomer();
+        customerList.forEach(customer -> customerDao.deleteCustomer(customer.getCustomerId()));
     }
 
     @Test
