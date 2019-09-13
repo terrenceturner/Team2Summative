@@ -4,6 +4,7 @@ import com.company.rentalstoregroup.dao.CustomerDao;
 import com.company.rentalstoregroup.dao.InvoiceDao;
 import com.company.rentalstoregroup.dao.Invoice_ItemDao;
 import com.company.rentalstoregroup.dao.ItemDao;
+import com.company.rentalstoregroup.dto.Customer;
 import com.company.rentalstoregroup.dto.Invoice;
 import com.company.rentalstoregroup.dto.Invoice_Item;
 import com.company.rentalstoregroup.dto.Item;
@@ -11,17 +12,18 @@ import com.company.rentalstoregroup.viewmodel.InvoiceViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class ServiceLayer {
-
-
+    // Properties
     private CustomerDao customerDao;
     private ItemDao itemDao;
     private Invoice_ItemDao invoice_itemDao;
     private InvoiceDao invoiceDao;
 
+    // Constructor
     @Autowired
     public ServiceLayer(CustomerDao customerDao, ItemDao itemDao, Invoice_ItemDao invoice_itemDao, InvoiceDao invoiceDao) {
         this.customerDao = customerDao;
@@ -66,6 +68,16 @@ public class ServiceLayer {
         invoiceDao.deleteInvoice(invoice_id);
     }
 
+    public List<InvoiceViewModel> getInvoiceByCustomer(int customer_id) {
+        List<Invoice> invoiceList = invoiceDao.getInvoicesByCustomer(customer_id);
+
+        List<InvoiceViewModel> invoiceViewModelList = new ArrayList<>();
+
+        invoiceList.forEach(invoice -> invoiceViewModelList.add(buildInvoiceViewModel(invoice)));
+
+        return invoiceViewModelList;
+    }
+
 
     // Item API
     public Item saveItem(Item item) {
@@ -94,6 +106,45 @@ public class ServiceLayer {
     }
 
     //Customer API
+    public Customer saveCustomer(Customer customer) {
+        return customerDao.addCustomer(customer);
+    }
 
+    public Customer findCustomer(int id) {
+        return customerDao.getCustomer(id);
+    }
 
+    public List<Customer> findAllCustomers() {
+        return customerDao.findAllCustomer();
+    }
+
+    public void updateCustomer(Customer customer) {
+        customerDao.updateCustomer(customer);
+    }
+
+    public void removeCusomter(int id) {
+        customerDao.deleteCustomer(id);
+    }
+
+    // Build InvoiceView
+    private InvoiceViewModel buildInvoiceViewModel(Invoice invoice) {
+        // Get the associated customer
+        Customer customer = customerDao.getCustomer(invoice.getCustomer_id());
+
+        // Get the invoiceItems associated with the invoice
+        List<Invoice_Item> invoiceItemList = invoice_itemDao.getInvoice_ItemByInvoice(invoice.getInvoice_id());
+
+        // Assemble the InvoiceViewModel
+        InvoiceViewModel invoiceView = new InvoiceViewModel();
+        invoiceView.setInvoice_id(invoice.getInvoice_id());
+        invoiceView.setCustomer_id(customer.getCustomerId());
+        invoiceView.setOrder_date(invoice.getOrder_date());
+        invoiceView.setPickup_date(invoice.getPickup_date());
+        invoiceView.setReturn_date(invoice.getReturn_date());
+        invoiceView.setLate_fee(invoice.getLate_fee());
+        invoiceView.setInvoice_items(invoiceItemList);
+
+        // Return the invoiceView
+        return invoiceView;
+    }
 }

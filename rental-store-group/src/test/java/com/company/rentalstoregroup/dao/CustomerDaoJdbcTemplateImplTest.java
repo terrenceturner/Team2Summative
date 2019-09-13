@@ -19,8 +19,7 @@ import static org.junit.Assert.assertNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class CustomerDaoJdbcTemplateImplTest {
-
-
+    // Properties
     @Autowired
     protected CustomerDaoJdbcTemplateImpl customerDao;
     @Autowired
