@@ -20,41 +20,18 @@ import static org.junit.Assert.*;
 @SpringBootTest
 public class ItemDaoTest {
 
-    @Autowired
-    CustomerDao customerDao;
 
     @Autowired
     ItemDao itemDao;
 
-    @Autowired
-    InvoiceDao invoiceDao;
-
-    @Autowired
-    Invoice_ItemDao invoice_itemDao;
 
     @Before
     public void setUp() throws Exception {
 
         // Clean up the test db
-        List<Customer> customerList = customerDao.findAllCustomer();
-        for (Customer customer : customerList){
-            customerDao.deleteCustomer(customer.getCustomerId());
-        }
-
         List<Item> itemList = itemDao.getAllItems();
         for (Item item : itemList) {
             itemDao.deleteItem(item.getItem_id());
-        }
-
-        List<Invoice> invoiceList = invoiceDao.getAllInvoices();
-        for (Invoice invoice :invoiceList) {
-            invoiceDao.deleteInvoice(invoice.getInvoice_id());
-        }
-
-
-        List<Invoice_Item> invoice_itemList = invoice_itemDao.getAllInvoice_Item();
-        for (Invoice_Item invoice_item : invoice_itemList){
-            invoice_itemDao.deleteInvoice_Item(invoice_item.getInvoice_item_id());
         }
 
 
