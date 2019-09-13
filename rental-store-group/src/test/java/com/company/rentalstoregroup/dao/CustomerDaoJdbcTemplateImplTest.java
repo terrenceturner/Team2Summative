@@ -77,7 +77,6 @@ public class CustomerDaoJdbcTemplateImplTest {
         customer.setCompany("BigCoCo");
         customerDao.addCustomer(customer);
 
-        customer = new Customer();
         customer.setPhone("5678934432");
         customer.setLastName("Hastings");
         customer.setFirstName("Greg");
@@ -104,7 +103,7 @@ public class CustomerDaoJdbcTemplateImplTest {
 
         customerDao.deleteCustomer(customer.getCustomerId());
         customer1 = customerDao.getCustomer(customer.getCustomerId());
-        assertNull(customer);
+        assertNull(customer1);
     }
 
     @Test
