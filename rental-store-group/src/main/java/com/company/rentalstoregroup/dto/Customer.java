@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Customer {
     //properties (columns)
-    private Integer customerId;
+    private int customerId;
     private String firstName;
     private String lastName;
     private String email;
@@ -12,7 +12,7 @@ public class Customer {
     private String phone;
     //getters and setters
 
-    public Integer getCustomerId() {
+    public int getCustomerId() {
         return customerId;
     }
 
@@ -68,7 +68,7 @@ public class Customer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return customerId.equals(customer.customerId) &&
+        return customerId == customer.customerId &&
                 firstName.equals(customer.firstName) &&
                 lastName.equals(customer.lastName) &&
                 email.equals(customer.email) &&
@@ -80,6 +80,7 @@ public class Customer {
     public int hashCode() {
         return Objects.hash(customerId, firstName, lastName, email, company, phone);
     }
+
 
     //constructor (optional, recommended)
 

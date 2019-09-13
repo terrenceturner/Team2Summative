@@ -31,13 +31,13 @@ public interface CustomerDao {
 
     /**
      * deletes customer by id
-     * @param id
+     * @param customerId
      */
     void deleteCustomer(int customerId);
 
     /**
      * finds a customer by id
-     * @param id
+     * @param customerId
      * @return
      */
     Customer getCustomer (int customerId);

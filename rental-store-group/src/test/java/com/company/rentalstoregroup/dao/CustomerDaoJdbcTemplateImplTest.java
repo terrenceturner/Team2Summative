@@ -115,7 +115,7 @@ public class CustomerDaoJdbcTemplateImplTest {
         customer.setFirstName("Draco");
         customer.setEmail("dmal@gmail.com");
         customer.setCompany("BigCoCo");
-        customerDao.addCustomer(customer);
+        customer = customerDao.addCustomer(customer);
 
         Customer customer1 = customerDao.getCustomer(customer.getCustomerId());
         assertEquals(customer1, customer);
