@@ -10,8 +10,8 @@ public class Customer {
     private String email;
     private String company;
     private String phone;
-    //getters and setters
 
+    //getters and setters
     public int getCustomerId() {
         return customerId;
     }

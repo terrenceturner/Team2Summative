@@ -5,13 +5,11 @@ import com.company.rentalstoregroup.dto.Invoice;
 import com.company.rentalstoregroup.dto.Invoice_Item;
 import com.company.rentalstoregroup.dto.Item;
 import com.company.rentalstoregroup.service.ServiceLayer;
-
 import com.company.rentalstoregroup.viewmodel.InvoiceViewModel;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
