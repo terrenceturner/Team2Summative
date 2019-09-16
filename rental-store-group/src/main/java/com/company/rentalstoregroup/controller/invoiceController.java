@@ -11,12 +11,6 @@ import java.util.List;
 public class invoiceController {
     private ServiceLayer serviceLayer;
 
-    //HTTP methods
-    //@RequestMapping(value = "/", method = RequestMethod.*)
-    //@ResponseStatus(value = HttpStatus.*)
-    //public void methodName(Class class){}
-    //will call to service layer
-
     //create
     @RequestMapping(value = "/invoice", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.CREATED)

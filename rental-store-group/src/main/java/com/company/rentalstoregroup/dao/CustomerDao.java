@@ -1,6 +1,7 @@
 package com.company.rentalstoregroup.dao;
 
 import com.company.rentalstoregroup.dto.Customer;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
