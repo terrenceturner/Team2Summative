@@ -79,7 +79,6 @@ public class ServiceLayerTest {
         invoiceItem.setUnit_rate(new BigDecimal("4.99"));
         invoiceItem.setDiscount(new BigDecimal("0.99"));
 
-
         // Collect all the InvoiceItems into a list
         List<Invoice_Item> invoiceItemList = new ArrayList<>();
         invoiceItemList.add(invoiceItem);
@@ -532,7 +531,7 @@ public class ServiceLayerTest {
         // invoiceItemDao Mock Input (invoiceItemInput1)
         Invoice_Item invoiceItemInput1 = new Invoice_Item();
         invoiceItemInput1.setInvoice_id(1);
-        invoiceItemInput1.setItem_id(3);
+        invoiceItemInput1.setItem_id(1);
         invoiceItemInput1.setQuantity(42);
         invoiceItemInput1.setUnit_rate(new BigDecimal("4.99"));
         invoiceItemInput1.setDiscount(new BigDecimal("0.99"));
@@ -541,7 +540,7 @@ public class ServiceLayerTest {
         Invoice_Item invoiceItemResponse1 = new Invoice_Item();
         invoiceItemResponse1.setInvoice_item_id(1);
         invoiceItemResponse1.setInvoice_id(1);
-        invoiceItemResponse1.setItem_id(3);
+        invoiceItemResponse1.setItem_id(1);
         invoiceItemResponse1.setQuantity(42);
         invoiceItemResponse1.setUnit_rate(new BigDecimal("4.99"));
         invoiceItemResponse1.setDiscount(new BigDecimal("0.99"));
@@ -586,6 +585,10 @@ public class ServiceLayerTest {
         allInvoiceItemList.add(invoiceItemResponse2);
         allInvoiceItemList.add(invoiceItemResponse3);
 
+        // Add invoiceItemresponse1 to a List of InvoiceItem objects
+        List<Invoice_Item> invoiceId1List = new ArrayList<>();
+        invoiceId1List.add(invoiceItemResponse1);
+
         // Add invoiceItemResponses with InvoiceId of 2 to a list of InvoiceItem objects
         List<Invoice_Item> invoiceId2InvoiceItemList = new ArrayList<>();
         invoiceId2InvoiceItemList.add(invoiceItemResponse2);
@@ -610,7 +613,7 @@ public class ServiceLayerTest {
         doReturn(allInvoiceItemList).when(invoice_itemDao).getAllInvoice_Item();
 
         // Mocking getInvoiceItemByInvoice()
-        doReturn().when(invoice_itemDao).getInvoice_ItemByInvoice();
+        doReturn(invoiceId1List).when(invoice_itemDao).getInvoice_ItemByInvoice(invoiceItemResponse1.getInvoice_id());
         doReturn(invoiceId2InvoiceItemList).when(invoice_itemDao).getInvoice_ItemByInvoice(invoiceItemResponse2.getInvoice_id());
 
         // Mocking updateInvoiceItem()

@@ -48,12 +48,12 @@ public class ServiceLayer {
         invoice_list.forEach(i->
         {
             i.setInvoice_id(invoiceViewModel.getInvoice_id());
-            invoice_itemDao.addInvoice_Item(i);
+            i = invoice_itemDao.addInvoice_Item(i);
         });
 
-        List<Invoice_Item> db_list = invoice_itemDao.getInvoice_ItemByInvoice(invoiceViewModel.getInvoice_id());
+        List<Invoice_Item> invoiceItemList = invoice_itemDao.getInvoice_ItemByInvoice(invoiceViewModel.getInvoice_id());
 
-        invoiceViewModel.setInvoice_items(db_list);
+        invoiceViewModel.setInvoice_items(invoiceItemList);
 
         return invoiceViewModel;
     }
