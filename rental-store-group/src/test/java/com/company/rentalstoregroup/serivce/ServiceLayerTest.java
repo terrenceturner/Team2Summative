@@ -6,6 +6,7 @@ import com.company.rentalstoregroup.dto.Invoice_Item;
 import com.company.rentalstoregroup.dto.Item;
 import com.company.rentalstoregroup.service.ServiceLayer;
 
+import com.company.rentalstoregroup.viewmodel.InvoiceViewModel;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +31,7 @@ public class ServiceLayerTest {
     private ArgumentCaptor<Item> itemArgumentCaptor = ArgumentCaptor.forClass(Item.class);
     private ArgumentCaptor<Invoice> invoiceArgumentCaptor = ArgumentCaptor.forClass(Invoice.class);
     private ArgumentCaptor<Customer> customerArgumentCaptor = ArgumentCaptor.forClass(Customer.class);
-    private ArgumentCaptor<Invoice_Item> invoice_itemArugmentCaptor = ArgumentCaptor.forClass(Invoice_Item.class);
+    private ArgumentCaptor<Invoice_Item> invoice_itemArgumentCaptor = ArgumentCaptor.forClass(Invoice_Item.class);
     private ArgumentCaptor<Integer> integerArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
 
     // SetUp()
@@ -47,6 +48,55 @@ public class ServiceLayerTest {
     // InvoiceView API Test (add, delete, getInvoiceByCustomer)
     @Test
     public void addInvoice() {
+        // Add a Customer to the database
+        Customer customer = new Customer();
+        customer.setFirstName("Dominick");
+        customer.setLastName("DeChristofaro");
+        customer.setEmail("dominick.dechristofaro@gmail.com");
+        customer.setCompany("Omni");
+        customer.setPhone("999-999-9999");
+        customer = service.saveCustomer(customer);
+
+        // Verify it was added to the database
+        Customer customerCopy = service.findCustomer(customer.getCustomerId());
+        TestCase.assertEquals(customerCopy, customer);
+
+        // Add an Item to the database
+        Item item = new Item();
+        item.setName("Drill");
+        item.setDescription("Power Tool");
+        item.setDaily_rate(new BigDecimal("24.99"));
+        item = service.saveItem(item);
+
+        // Verify it was added
+        Item itemCopy = service.findItem(item.getItem_id());
+        TestCase.assertEquals(itemCopy, item);
+
+        // Add an InvoiceItem to the database
+        Invoice_Item invoiceItem = new Invoice_Item();
+        invoiceItem.setItem_id(item.getItem_id());
+        invoiceItem.setQuantity(42);
+        invoiceItem.setUnit_rate(new BigDecimal("4.99"));
+        invoiceItem.setDiscount(new BigDecimal("0.99"));
+
+
+        // Collect all the InvoiceItems into a list
+        List<Invoice_Item> invoiceItemList = new ArrayList<>();
+        invoiceItemList.add(invoiceItem);
+
+        // Create an InvoiceViewModel
+        InvoiceViewModel invoiceViewModel = new InvoiceViewModel();
+        invoiceViewModel.setCustomer_id(customer.getCustomerId());
+        invoiceViewModel.setOrder_date(LocalDate.of(2000,1,1));
+        invoiceViewModel.setPickup_date(LocalDate.of(2000,2,2));
+        invoiceViewModel.setReturn_date(LocalDate.of(2000,3,3));
+        invoiceViewModel.setLate_fee(new BigDecimal("4.99"));
+        invoiceViewModel.setInvoice_items(invoiceItemList);
+        invoiceViewModel = service.createInvoiceViewModel(invoiceViewModel);
+
+        // Test the addInvoice() method
+        InvoiceViewModel invoiceViewModelCopy = service.getInvoiceViewModel(invoiceViewModel.getInvoice_id());
+        TestCase.assertEquals(invoiceViewModelCopy, invoiceViewModel);
 
     }
 
@@ -560,10 +610,11 @@ public class ServiceLayerTest {
         doReturn(allInvoiceItemList).when(invoice_itemDao).getAllInvoice_Item();
 
         // Mocking getInvoiceItemByInvoice()
+        doReturn().when(invoice_itemDao).getInvoice_ItemByInvoice();
         doReturn(invoiceId2InvoiceItemList).when(invoice_itemDao).getInvoice_ItemByInvoice(invoiceItemResponse2.getInvoice_id());
 
         // Mocking updateInvoiceItem()
-        doNothing().when(invoice_itemDao).updateInvoice_Item(invoice_itemArugmentCaptor.capture());
+        doNothing().when(invoice_itemDao).updateInvoice_Item(invoice_itemArgumentCaptor.capture());
 
         // Mocking deleteInvoiceItem()
         doNothing().when(invoice_itemDao).deleteInvoice_Item(integerArgumentCaptor.capture());

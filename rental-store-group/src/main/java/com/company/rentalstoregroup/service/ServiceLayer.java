@@ -58,6 +58,20 @@ public class ServiceLayer {
         return invoiceViewModel;
     }
 
+    public InvoiceViewModel getInvoiceViewModel(int invoice_id) {
+        // Create a new InvoiceViewModel
+        InvoiceViewModel ivm = new InvoiceViewModel();
+        Invoice invoice = invoiceDao.getInvoice(invoice_id);
+        ivm.setInvoice_id(invoice_id);
+        ivm.setCustomer_id(invoice.getCustomer_id());
+        ivm.setOrder_date(invoice.getOrder_date());
+        ivm.setPickup_date(invoice.getPickup_date());
+        ivm.setReturn_date(invoice.getReturn_date());
+        ivm.setLate_fee(invoice.getLate_fee());
+        ivm.setInvoice_items(invoice_itemDao.getInvoice_ItemByInvoice(invoice_id));
+        return ivm;
+    }
+
     public void deleteInvoiceViewModel(int invoice_id){
         List<Invoice_Item> invoice_itemList = invoice_itemDao.getInvoice_ItemByInvoice(invoice_id);
 
