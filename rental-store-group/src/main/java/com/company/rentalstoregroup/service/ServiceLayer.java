@@ -48,14 +48,28 @@ public class ServiceLayer {
         invoice_list.forEach(i->
         {
             i.setInvoice_id(invoiceViewModel.getInvoice_id());
-            invoice_itemDao.addInvoice_Item(i);
+            i = invoice_itemDao.addInvoice_Item(i);
         });
 
-        List<Invoice_Item> db_list = invoice_itemDao.getInvoice_ItemByInvoice(invoiceViewModel.getInvoice_id());
+        List<Invoice_Item> invoiceItemList = invoice_itemDao.getInvoice_ItemByInvoice(invoiceViewModel.getInvoice_id());
 
-        invoiceViewModel.setInvoice_items(db_list);
+        invoiceViewModel.setInvoice_items(invoiceItemList);
 
         return invoiceViewModel;
+    }
+
+    public InvoiceViewModel getInvoiceViewModel(int invoice_id) {
+        // Create a new InvoiceViewModel
+        InvoiceViewModel ivm = new InvoiceViewModel();
+        Invoice invoice = invoiceDao.getInvoice(invoice_id);
+        ivm.setInvoice_id(invoice_id);
+        ivm.setCustomer_id(invoice.getCustomer_id());
+        ivm.setOrder_date(invoice.getOrder_date());
+        ivm.setPickup_date(invoice.getPickup_date());
+        ivm.setReturn_date(invoice.getReturn_date());
+        ivm.setLate_fee(invoice.getLate_fee());
+        ivm.setInvoice_items(invoice_itemDao.getInvoice_ItemByInvoice(invoice_id));
+        return ivm;
     }
 
     public void deleteInvoiceViewModel(int invoice_id){
