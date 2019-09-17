@@ -4,6 +4,8 @@ import com.company.rentalstoregroup.viewmodel.InvoiceViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -14,10 +16,9 @@ public class invoiceController {
     //create
     @RequestMapping(value = "/invoice", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public InvoiceViewModel createInvoice(@RequestBody InvoiceViewModel invoiceViewModel){
+    public InvoiceViewModel createInvoice(@RequestBody @Valid InvoiceViewModel invoiceViewModel){
         return service.createInvoiceViewModel(invoiceViewModel);
     }
-
 
     //delete
     @RequestMapping(value = "/invoice/{invoiceId}", method = RequestMethod.DELETE)

@@ -1,6 +1,8 @@
 package com.company.rentalstoregroup.dto;
 
 import javax.swing.text.DateFormatter;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
@@ -8,11 +10,20 @@ import java.util.Objects;
 
 public class Invoice {
     //properties (columns)
+    @NotNull
+    @Digits(integer = 11, fraction = 0)
     private int invoice_id;
+    @NotNull
+    @Digits(integer = 11, fraction = 0)
     private int customer_id;
+    @NotNull
     private LocalDate order_date;
+    @NotNull
     private LocalDate pickup_date;
+    @NotNull
     private LocalDate return_date;
+    @NotNull
+    @Digits(integer = 8, fraction = 2)
     private BigDecimal late_fee;
 
     //getters and setters

@@ -1,14 +1,28 @@
 package com.company.rentalstoregroup.dto;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Invoice_Item {
     // Properties
+    @NotNull
+    @Digits(integer = 11, fraction = 0)
     private int invoice_item_id;
+    @NotNull
+    @Digits(integer = 11, fraction = 0)
     private int invoice_id;
+    @NotNull
+    @Digits(integer = 11, fraction = 0)
     private int item_id;
+    @NotNull
+    @Digits(integer = 11, fraction = 0)
     private int quantity;
+    @NotNull
+    @Digits(integer = 8, fraction = 2)
     private BigDecimal unit_rate;
+    @NotNull
+    @Digits(integer = 8, fraction = 2)
     private BigDecimal discount;
 
     // Getters & Setters

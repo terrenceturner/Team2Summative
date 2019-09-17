@@ -2,6 +2,8 @@ package com.company.rentalstoregroup.viewmodel;
 
 import com.company.rentalstoregroup.dto.Invoice_Item;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,11 +11,20 @@ import java.util.List;
 import java.util.Objects;
 
 public class InvoiceViewModel {
+    @NotNull
+    @Digits(integer = 11, fraction = 0)
     private int invoice_id;
+    @NotNull
+    @Digits(integer = 11, fraction = 0)
     private int customer_id;
+    @NotNull
     private LocalDate order_date;
+    @NotNull
     private LocalDate pickup_date;
+    @NotNull
     private LocalDate return_date;
+    @NotNull
+    @Digits(integer = 8, fraction = 2)
     private BigDecimal late_fee;
     private List<Invoice_Item> invoice_items = new ArrayList<>();
 

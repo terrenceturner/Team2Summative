@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -15,7 +16,7 @@ public class customerController {
     // Post
     @RequestMapping(value = "/customer", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Customer addCustomer(@RequestBody Customer customer) {
+    public Customer addCustomer(@RequestBody @Valid Customer customer) {
         return service.saveCustomer(customer);
     }
 
@@ -36,7 +37,7 @@ public class customerController {
     // Put
     @RequestMapping(value = "/customer", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void updateCustomer(@RequestBody Customer customer) {
+    public void updateCustomer(@RequestBody @Valid Customer customer) {
         service.updateCustomer(customer);
     }
 
