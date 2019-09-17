@@ -1,14 +1,29 @@
 package com.company.rentalstoregroup.dto;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 public class Customer {
     //properties (columns)
+    @NotNull
+    @Digits(integer = 11, fraction = 0)
     private int customerId;
+    @NotNull
+    @Size(max = 50)
     private String firstName;
+    @NotNull
+    @Size(max = 50)
     private String lastName;
+    @NotNull
+    @Size(max = 75)
     private String email;
+    @NotNull
+    @Size(max = 50)
     private String company;
+    @NotNull
+    @Size(max = 50)
     private String phone;
 
     //getters and setters

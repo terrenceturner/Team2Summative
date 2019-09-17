@@ -4,6 +4,8 @@ import com.company.rentalstoregroup.service.ServiceLayer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -15,7 +17,7 @@ public class itemController {
     // Post
     @RequestMapping(value = "/item", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Item addItem(@RequestBody Item item){
+    public Item addItem(@RequestBody @Valid Item item){
         return service.saveItem(item);
     }
 
@@ -36,7 +38,7 @@ public class itemController {
     // Put
     @RequestMapping(value = "/item", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void updateItem(@RequestBody Item item){
+    public void updateItem(@RequestBody @Valid Item item){
         service.updateItem(item);
     }
 
